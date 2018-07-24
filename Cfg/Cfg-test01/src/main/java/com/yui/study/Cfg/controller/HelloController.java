@@ -24,14 +24,14 @@ public class HelloController {
     @GetMapping("/t1")
     public String test(){
         // 测试本模块 @ConfigurationProperties(prefix="syspara")
-        System.out.println("test : " + systemConfig.getUsername() + "\t" + systemConfig.getPassword());
+        System.out.println("systemConfig : " + systemConfig.getUsername() + "\t" + systemConfig.getPassword());
         // 测试底层模块 @ConfigurationProperties(prefix="syspara")
-        System.out.println("test : " + systemConfigInner.getUsername() + "\t" + systemConfigInner.getPassword());
+        System.out.println("systemConfigInner : " + systemConfigInner.getUsername() + "\t" + systemConfigInner.getPassword());
         // @ConfigurationProperties(prefix="syspara")
-        System.out.println("test : " + systemConfig02.getUsername() + "\t" + systemConfig02.getPassword());
-        System.out.println("test : " + systemConfig03.getUsername() + "\t" + systemConfig03.getPassword());
-        System.out.println("test : " + systemConfig04.getUsername() + "\t" + systemConfig04.getPassword());
-        System.out.println("test : " + systemConfig05.getUsername() + "\t" + systemConfig05.getPassword());
+        System.out.println("systemConfig02 : " + systemConfig02.getUsername() + "\t" + systemConfig02.getPassword());
+        System.out.println("systemConfig03 : " + systemConfig03.getUsername() + "\t" + systemConfig03.getPassword());
+        System.out.println("systemConfig04 : " + systemConfig04.getUsername() + "\t" + systemConfig04.getPassword());
+        System.out.println("systemConfig05 : " + systemConfig05.getUsername() + "\t" + systemConfig05.getPassword());
         return "test";
     }
 

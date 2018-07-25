@@ -1,48 +1,35 @@
-package com.yui.study.Cfg.controller;
+package com.yui.study.Cfg.util;
 
 import com.yui.study.Cfg.config.*;
 import com.yui.study.Cfg.test.config.SystemConfigInnerIn;
 import com.yui.study.Cfg.test.config.SystemConfigInnerIn06;
-import com.yui.study.Cfg.util.ConfigUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-@RequestMapping("/test")
-public class HelloController {
-    @Autowired
+public class ConfigUtil {
     private SystemConfig systemConfig;
-    /*@Autowired
-    private SystemConfig01 systemConfig01;*/
-    @Autowired
     private SystemConfigInner systemConfigInner;
-    @Autowired
     private SystemConfig02 systemConfig02;
-    @Autowired
     private SystemConfig03 systemConfig03;
-    @Autowired
     private SystemConfig04 systemConfig04;
-    @Autowired
     private SystemConfig05 systemConfig05;
-    @Autowired
     private SystemConfig06 systemConfig06;
-    @Autowired
     private SystemConfigInner06 systemConfigInner06;
-    @Autowired
     private SystemConfigInnerIn systemConfigInnerIn;
-    @Autowired
     private SystemConfigInnerIn06 systemConfigInnerIn06;
-    @ResponseBody
-    @GetMapping("/t1")
-    public String test(){
-        System.out.println("-----------------------t1:");
+    public ConfigUtil(){
+        this.systemConfig = (SystemConfig) ApplicationContextRegister.getApplicationContext().getBean("systemConfig");
+        this.systemConfigInner = (SystemConfigInner) ApplicationContextRegister.getApplicationContext().getBean("systemConfigInner");
+        this.systemConfig02 = (SystemConfig02) ApplicationContextRegister.getApplicationContext().getBean("systemConfig02");
+        this.systemConfig03 = (SystemConfig03) ApplicationContextRegister.getApplicationContext().getBean("systemConfig03");
+        this.systemConfig04 = (SystemConfig04) ApplicationContextRegister.getApplicationContext().getBean("systemConfig04");
+        this.systemConfig05 = (SystemConfig05) ApplicationContextRegister.getApplicationContext().getBean("systemConfig05");
+        this.systemConfig06 = (SystemConfig06) ApplicationContextRegister.getApplicationContext().getBean("systemConfig06");
+        this.systemConfigInner06 = (SystemConfigInner06) ApplicationContextRegister.getApplicationContext().getBean("systemConfigInner06");
+        this.systemConfigInnerIn = (SystemConfigInnerIn) ApplicationContextRegister.getApplicationContext().getBean("systemConfigInnerIn");
+        this.systemConfigInnerIn06 = (SystemConfigInnerIn06) ApplicationContextRegister.getApplicationContext().getBean("systemConfigInnerIn06");
+    }
+    public void displayAllCfg(){
         // 测试本模块 @ConfigurationProperties(prefix="syspara")
         System.out.println("systemConfig : " + systemConfig.getUsername() + "\t" + systemConfig.getPassword());
-        // 测试本模块 @ConfigurationProperties(prefix="syspara")
-        //System.out.println("systemConfig01 : " + systemConfig01.getUsername() + "\t" + systemConfig01.getPassword());
         // 测试底层模块 @ConfigurationProperties(prefix="syspara")
         System.out.println("systemConfigInner : " + systemConfigInner.getUsername() + "\t" + systemConfigInner.getPassword());
         // @ConfigurationProperties(prefix="syspara")
@@ -54,15 +41,6 @@ public class HelloController {
         System.out.println("systemConfigInner06 : " + systemConfigInner06.getUsername() + "\t" + systemConfigInner06.getPassword());
         System.out.println("systemConfigInnerIn : " + systemConfigInnerIn.getUsername() + "\t" + systemConfigInnerIn.getPassword());
         System.out.println("systemConfigInnerIn06 : " + systemConfigInnerIn06.getUsername() + "\t" + systemConfigInnerIn06.getPassword());
-        return "test";
-    }
-    @ResponseBody
-    @GetMapping("/t2")
-    public String test01(){
-        System.out.println("-----------------------t2:");
-        ConfigUtil  cfu = new ConfigUtil();
-        cfu.displayAllCfg();
-        return "1";
     }
 
 }

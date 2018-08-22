@@ -10,7 +10,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/XuZhuohao/StudySummarize
-          searchPaths: Spring-cloud/ConfigServer
+          uri: https://github.com/XuZhuohao/StudySummarize # git 根目录
+          searchPaths: Spring-cloud/ConfigServer # 配置文件位置
   application:
     name: config-server

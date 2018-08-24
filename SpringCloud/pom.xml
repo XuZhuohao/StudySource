@@ -8,6 +8,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>Cloud_Server</module>
+        <module>cloud_config_server</module>
+        <module>cloud_config_client</module>
+        <module>cloud_client</module>
+        <module>cloud_ribbon</module>
     </modules>
     <packaging>pom</packaging>
 

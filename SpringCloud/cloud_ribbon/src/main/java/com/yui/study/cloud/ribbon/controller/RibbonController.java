@@ -17,7 +17,7 @@ public class RibbonController {
     @GetMapping("testRibbon")
     @LoadBalanced
     public String ribbonMethod(){
-        String test = restTemplate.getForObject("http://service-helloworld/test", String.class);
+        String test = restTemplate.getForObject("http://service-client/test", String.class);
         test += restTemplate.getForObject("http://config-client/testHello", String.class);
         return "xx:" + test;
     }

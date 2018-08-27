@@ -14,13 +14,12 @@ import org.springframework.web.client.RestTemplate;
  * 注解将所有标注了"@Configuration"注解的配置类，"一股脑儿"全部注入spring容器中。
  *
  * @author xzh
- *
  */
 @Configuration
 public class RestTemplateConfig {
     @Bean
     @LoadBalanced
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }

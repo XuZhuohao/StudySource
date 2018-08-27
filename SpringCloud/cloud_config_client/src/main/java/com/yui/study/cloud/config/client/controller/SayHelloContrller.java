@@ -10,7 +10,7 @@ public class SayHelloContrller {
     String t2;
 
     @GetMapping("testHello")
-    public String testHello(){
+    public String testHello() {
         return "hello:" + t2;
     }
 }

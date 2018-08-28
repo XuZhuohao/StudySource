@@ -12,6 +12,8 @@
         <module>cloud_config_client</module>
         <module>cloud_client</module>
         <module>cloud_ribbon</module>
+        <module>cloud_feign</module>
+        <module>cloud_hystrix</module>
     </modules>
     <packaging>pom</packaging>
 

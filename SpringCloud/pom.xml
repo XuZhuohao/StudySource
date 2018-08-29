@@ -14,6 +14,7 @@
         <module>cloud_ribbon</module>
         <module>cloud_feign</module>
         <module>cloud_hystrix</module>
+        <module>cloud_stream</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
  */
 public class MyBase64 {
     public static void main(String[] args) throws IOException {
-        String src = "Xu Zhuo hao";
+        String src = "A";
         System.out.println("src : " + src);
         System.out.println("JDK:--------");
         String base64Src = jdkBase64Encode(src);
@@ -63,6 +63,7 @@ public class MyBase64 {
         return new String(org.bouncycastle.util.encoders.Base64.decode(src.getBytes()));
     }
 
+    @Deprecated
     public static void test1(String src) {
         byte[] srcBtyes = src.getBytes();
         for (byte b : srcBtyes) {
@@ -101,6 +102,7 @@ public class MyBase64 {
             rtnCode.append(Base64Code.COD.get(Integer.valueOf(stringBuilder.toString(), 2)));
         }
         /*
+            TODO： 错了
             (allBytes.length % 24) % 8
             每6个对应一个code
             每8个为一个byte

@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
  */
 public class MyBase64 {
     public static void main(String[] args) throws IOException {
-        String src = "A";
+        String src = "Xu Zhuo hao";
         System.out.println("src : " + src);
         System.out.println("JDK:--------");
         String base64Src = jdkBase64Encode(src);
@@ -80,7 +80,8 @@ public class MyBase64 {
             System.out.print(g1.format(Integer.valueOf(Integer.toBinaryString(b))) + " ");
             allByte.append(g1.format(Integer.valueOf(Integer.toBinaryString(b))));
         }
-        for (int i = 0; i < srcBtyes.length % 3; i++) {
+        int length = allByte.toString().length();
+        for (int i = 0; i < 6 - length % 6; i++) {
             allByte.append(0);
         }
         System.out.println();
@@ -112,7 +113,7 @@ public class MyBase64 {
             byte:  01011000 01110101 00100000 01011010 01101000 01110101 01101111 00100000 01101000 01100001 01101111
             group: 01011000 01110101 00100000 | 01011010 01101000 01110101 | 01101111 00100000 01101000 | 01100001 01101111
          */
-        for (int i = 0; i < 3 - (allBytes.length % 24) % 8; i++) {
+        for (int i = 0; i < 4 - (24 - (allBytes.length % 24)) / 6; i++) {
             rtnCode.append("=");
         }
         System.out.println();

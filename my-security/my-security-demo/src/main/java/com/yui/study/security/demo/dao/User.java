@@ -19,12 +19,12 @@ public class User {
     /**
      * @NotBlank
      */
-    @NotBlank
+    @NotBlank(message = "name must not be blank")
     private String name;
 
     private Long id;
 
-    @NotNull
+    @NotNull(message = "password must not be null")
     private String password;
     private Date birthDate;
 

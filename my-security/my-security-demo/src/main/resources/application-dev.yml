@@ -7,7 +7,8 @@ spring:
   datasource:
     #com.mysql.cj.jdbc.Driver
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/sso?seUnicode=true&characterEncoding=utf-8&useSSL=false
+    # allowPublicKeyRetrieval=true  Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed
+    url: jdbc:mysql://127.0.0.1:3306/sso?seUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: a
     platform: mysql

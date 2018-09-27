@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -76,10 +77,16 @@ public class UserControllerTest {
 
     @Test
     public void whenCreateUserFail() throws Exception {
+        //TODO: Study by Hibernate Validator
         // name blank
         // password null
         String instr = "{\"birthDate\":1537347954443,\"name\":\"\",\"password\":\"password\"}";
         System.out.println(instr);
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post("/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(instr))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError())
+                .andReturn().getResponse();
         String result = mockMvc.perform(MockMvcRequestBuilders.post("/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(instr))

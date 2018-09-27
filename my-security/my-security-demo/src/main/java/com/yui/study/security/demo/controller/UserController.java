@@ -2,10 +2,12 @@ package com.yui.study.security.demo.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.yui.study.security.demo.dao.User;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,7 +32,11 @@ public class UserController {
         return rtn;
     }
     @PostMapping
-    public User createUser(@Valid @RequestBody User user){
+    @JsonView(User.UserSimpleView.class)
+    public User createUser(@Valid @RequestBody User user/*, BindingResult errs*/){
+/*        if (errs.hasErrors()){
+            errs.getAllErrors().forEach(err -> System.out.println(err.getDefaultMessage()));
+        }*/
         System.out.println(user.getName());
         System.out.println(user.getPassword());
         System.out.println(user.getBirthDate());

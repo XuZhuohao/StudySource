@@ -2,11 +2,9 @@ package com.yui.study.springdatajpa.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ListIndexBase;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 班级Entity

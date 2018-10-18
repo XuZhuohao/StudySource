@@ -1,5 +1,6 @@
 package com.yui.study.springdatajpa.entity;
 
+import com.alibaba.fastjson.JSON;
 import com.yui.study.springdatajpa.repository.ClassRepository;
 import com.yui.study.springdatajpa.repository.EntityRepository;
 import com.yui.study.springdatajpa.repository.UserRepository;
@@ -7,13 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -91,7 +90,7 @@ public class TestEntityTest {
     }
 
     @Test
-    public void testManyToOn(){
+    public void testManyToOne(){
         ClassEntity classEntity = new ClassEntity();
         //classEntity.setId(1L);
         classEntity.setName("班级1");
@@ -99,9 +98,53 @@ public class TestEntityTest {
         UserEntity userEntity = new UserEntity();
         userEntity.setClasses(classEntity);
         userEntity.setLoginId("test1");
-        userEntity.setName("test");
-        userEntity.setPassword("password");
+        userEntity.setName("test1");
+        userEntity.setPassword("password1");
 
+        UserEntity userEntity02 = new UserEntity();
+        userEntity02.setClasses(classEntity);
+        userEntity02.setLoginId("test2");
+        userEntity02.setName("test2");
+        userEntity02.setPassword("password2");
+        List<UserEntity> userEntities = new ArrayList<>(16);
+        userEntities.add(userEntity);
+        userEntities.add(userEntity02);
+        classRepository.save(classEntity);
+        userRepository.saveAll(userEntities);
+
+        // OneToMany search
+        System.out.println("OneToMany search");
+        List<ClassEntity> classEntityList = classRepository.findAll();
+        classEntityList.forEach(classEntity1 ->
+                classEntity1.getUsers().forEach(user ->
+                        System.out.println(user.getName())));
+    }
+
+    @Test
+    public void testSaveManyToOneExistsOne(){
+
+        ClassEntity classEntity = new ClassEntity();
+        classEntity.setId(1L);
+        System.out.println(JSON.toJSONString(classEntity));
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setClasses(classEntity);
+        userEntity.setLoginId("test3");
+        userEntity.setName("test3");
+        userEntity.setPassword("password3");
         userRepository.save(userEntity);
+    }
+    @Test
+    public void testSimpleRowBounds(){
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable pageable = PageRequest.of(1,1,sort);
+        Page<UserEntity> page = userRepository.findAll(pageable);
+        System.out.println("总共：" + page.getTotalPages() + "页" + page.isLast());
+        while (!page.isLast()){
+            System.out.println("分页查询：第" + page.getPageable().getPageNumber() + "页");
+            List<UserEntity> userEntities = page.getContent();
+            userEntities.forEach(userEntity -> System.out.println(JSON.toJSONString(userEntity)));
+            page.getPageable().next();
+        }
     }
 }

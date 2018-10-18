@@ -1,5 +1,7 @@
 package com.yui.study.springdatajpa.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ListIndexBase;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Set;
  * @author XuZhuohao
  * @date 2018/10/17
  */
+@Setter
+@Getter
 @Entity
 @Table(name = "class")
 public class ClassEntity extends BaseEntity {
@@ -21,21 +25,6 @@ public class ClassEntity extends BaseEntity {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id")
-    private Set<UserEntity> users;
+    private List<UserEntity> users;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<UserEntity> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
 }

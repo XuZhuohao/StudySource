@@ -1,5 +1,7 @@
 package com.yui.study.springdatajpa.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -12,6 +14,8 @@ import java.util.Date;
  * @author XuZhuohao
  * @date 2018/10/17
  */
+@Setter
+@Getter
 @Table(name = "test")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -35,28 +39,4 @@ public class TestEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

@@ -1,5 +1,7 @@
 package com.yui.study.springdatajpa.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
@@ -17,6 +19,8 @@ import java.util.Date;
  * @author XuZhuohao
  * @date 2018/10/17
  */
+@Setter
+@Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
@@ -41,19 +45,4 @@ public class BaseEntity {
     @LastModifiedBy
     private Long cupdateId;
     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }

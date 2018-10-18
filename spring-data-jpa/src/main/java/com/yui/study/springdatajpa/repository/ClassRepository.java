@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author XuZhuohao
  * @date 2018/10/17
  */
-public interface ClassRepository extends JpaRepository<ClassEntity, Integer> {
+public interface ClassRepository extends JpaRepository<ClassEntity, Long> {
 }

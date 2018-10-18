@@ -15,10 +15,6 @@ import java.util.Set;
 @Entity
 @Table(name = "class")
 public class ClassEntity extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Basic
     @Column(name = "className", nullable = false)
     private String name;
@@ -26,14 +22,6 @@ public class ClassEntity extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id")
     private Set<UserEntity> users;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

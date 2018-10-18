@@ -17,15 +17,21 @@ import java.util.Date;
  * @author XuZhuohao
  * @date 2018/10/17
  */
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column
     private Date createTime;
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column
     private Date updateTime;
 
 /* 需要实现 AuditorAware<Long>

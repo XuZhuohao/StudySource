@@ -10,10 +10,6 @@ import java.util.List;
 @Table(name = "user")
 @Entity
 public class UserEntity extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Basic
     @Column(name = "username", nullable = false)
     private String name;
@@ -30,14 +26,6 @@ public class UserEntity extends BaseEntity{
     @ManyToOne(targetEntity = ClassEntity.class, cascade={CascadeType.PERSIST})
     @JoinColumn(name = "class_id")
     private ClassEntity classes;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

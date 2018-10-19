@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 #  create 启动时删数据库中的表，然后创建，退出时不删除数据表
 #  create-drop 启动时删数据库中的表，然后创建，退出时删除数据表 如果表不存在报错
 #  update 如果启动时表格式不一致则更新表，原有数据保留

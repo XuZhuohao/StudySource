@@ -7,6 +7,6 @@ package com.yui.study.crawler.service;
  * @date 2018/11/22
  */
 public interface HttpService {
-    void login();
+    void login(String userName, String password);
 
 }

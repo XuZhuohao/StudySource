@@ -4,9 +4,7 @@ import com.yui.study.crawler.service.HttpService;
 import lombok.Getter;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -44,9 +42,10 @@ public abstract class BaseHttpService implements HttpService {
     @Getter
     private InputStream is;
 
-    public void doGet(String url, Map<String, Object> paramMap, Map<String, String> headers){
+    public void doGet(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
+        url = buildGetUrl(url, paramMap);
         try {
             // 通过址默认配置创建一个httpClient实例
             httpClient = this.getHttpClient();
@@ -55,7 +54,9 @@ public abstract class BaseHttpService implements HttpService {
             // 设置请求头
             this.setHeaderLikeChrome(httpGet);
             // 设置自定义请求头（覆盖通用请求头）
-            headers.forEach(httpGet::setHeader);
+            if (headers != null) {
+                headers.forEach(httpGet::setHeader);
+            }
             // 设置配置请求参数
             // 连接主机服务超时时间 // 请求超时时间 // 数据读取超时时间
             RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(35000)
@@ -107,7 +108,9 @@ public abstract class BaseHttpService implements HttpService {
         // 设置请求头
         this.setHeaderLikeChrome(httpPost);
         // 设置自定义请求头（覆盖通用请求头）
-        headers.forEach(httpPost::setHeader);
+        if (headers != null) {
+            headers.forEach(httpPost::setHeader);
+        }
         if (null != paramMap && paramMap.size() > 0) {
             // 为httpPost设置封装好的请求参数
             try {
@@ -144,12 +147,13 @@ public abstract class BaseHttpService implements HttpService {
     private List<NameValuePair> buildPostParam(Map<String, Object> paramMap) {
         List<NameValuePair> nvps = new ArrayList<>();
         // 循环遍历，获取迭代器
-        paramMap.forEach((key, value)-> nvps.add(new BasicNameValuePair(key, String.valueOf(value))) );
+        paramMap.forEach((key, value) -> nvps.add(new BasicNameValuePair(key, String.valueOf(value))));
         return nvps;
     }
 
     /**
      * 设置通用谷歌浏览器请求头(常用 + 谷歌)
+     *
      * @param httpRequestBase request实例
      */
     private void setHeaderLikeChrome(HttpRequestBase httpRequestBase) {
@@ -161,6 +165,7 @@ public abstract class BaseHttpService implements HttpService {
 
     /**
      * 通用请求头
+     *
      * @param httpRequestBase request实例
      */
     private void setHeaderUsually(HttpRequestBase httpRequestBase) {
@@ -189,14 +194,18 @@ public abstract class BaseHttpService implements HttpService {
         // Origin: 发起一个针对跨域资源共享的请求（该请求要求服务器在响应中加入一个Access-Control-Allow-Origin的消息头，表示访问控制所允许的来源）
         // Referer: 表示浏览器所访问的前一个页面，可以认为是之前访问页面的链接将浏览器带到了当前页面。(单词意思其实就是Referrer了，历史原因)
     }
-    private CloseableHttpClient getHttpClient(){
+
+    /**
+     * 根据cookie创建实例
+     * @return httpClient 实例
+     */
+    private CloseableHttpClient getHttpClient() {
         return HttpClients.custom().setDefaultCookieStore(this.cookieStore).build();
     }
 
     /**
-     *
-     * @param httpResponse
-     * @throws IOException
+     * @param httpResponse 请求
+     * @throws IOException IOException
      */
     private void setInfor(CloseableHttpResponse httpResponse) throws IOException {
         // 清空全局头信息，把此次获取的头信息保存到全局
@@ -215,5 +224,24 @@ public abstract class BaseHttpService implements HttpService {
         }
         // 输出流
         this.is = entity.getContent();
+    }
+
+    /**
+     * 构建Get请求参数
+     *
+     * @param url      请假url
+     * @param paramMap 参数集合
+     * @return 构建后的请求url
+     */
+    private String buildGetUrl(String url, Map<String, Object> paramMap) {
+        if (paramMap == null) {
+            return url;
+        }
+        StringBuffer param = new StringBuffer();
+        paramMap.forEach((key, value) -> param.append("&").append(key).append("=").append(value));
+        if (param.length() > 0) {
+            param.replace(0, 1, "?");
+        }
+        return url + param.toString();
     }
 }

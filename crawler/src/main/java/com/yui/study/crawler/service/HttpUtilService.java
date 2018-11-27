@@ -1,0 +1,45 @@
+package com.yui.study.crawler.service;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * http的小工具
+ *
+ * @author XuZhuohao
+ * @date 2018/11/27
+ */
+public interface HttpUtilService {
+    /**
+     * 根据正则表达式，从html中，下载图片
+     * @param html html内容
+     * @param pattern 正则表达式
+     */
+    File downloadImage(String html, String pattern);
+
+    /**
+     * 根据相同，相似，构建正则表达式，从html中，下载图片
+     * @param html html内容
+     * @param sameChars 相同字符串
+     * @param likeChars 相似字符串
+     */
+    File downloadImage(String html, Map<Integer, String> sameChars, Map<Integer, String> likeChars);
+    /**
+     * 根据正则表达式，从html中，下载图片
+     * @param html html内容
+     * @param pattern 正则表达式
+     * @param httpServletResponse response
+     */
+    void downloadImage(String html, String pattern, HttpServletResponse httpServletResponse);
+    /**
+     * 根据相同，相似，构建正则表达式，从html中，下载图片
+     * @param html html内容
+     * @param sameChars 相同字符串
+     * @param likeChars 相似字符串
+     * @param httpServletResponse response
+     */
+    void downloadImage(String html, Map<Integer, String> sameChars, Map<Integer, String> likeChars, HttpServletResponse httpServletResponse);
+
+}

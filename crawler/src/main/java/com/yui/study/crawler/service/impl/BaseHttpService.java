@@ -32,7 +32,7 @@ import java.util.Map;
  * @author XuZhuohao
  * @date 2018/11/22
  */
-public abstract class BaseHttpService implements HttpService {
+public abstract class BaseHttpService {
     @Getter
     private String result;
     @Getter
@@ -67,9 +67,10 @@ public abstract class BaseHttpService implements HttpService {
             httpGet.setConfig(requestConfig);
             // 执行get请求得到返回对象
             response = httpClient.execute(httpGet);
-            this.setInfor(response);
+            this.setInfro(response);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException(e.getLocalizedMessage());
         } finally {
             // 关闭资源
             if (null != response) {
@@ -122,7 +123,7 @@ public abstract class BaseHttpService implements HttpService {
         try {
             // httpClient对象执行post请求,并返回响应参数对象
             httpResponse = httpClient.execute(httpPost);
-            this.setInfor(httpResponse);
+            this.setInfro(httpResponse);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -207,7 +208,7 @@ public abstract class BaseHttpService implements HttpService {
      * @param httpResponse 请求
      * @throws IOException IOException
      */
-    private void setInfor(CloseableHttpResponse httpResponse) throws IOException {
+    private void setInfro(CloseableHttpResponse httpResponse) throws IOException {
         // 清空全局头信息，把此次获取的头信息保存到全局
         this.responseHeaders.clear();
         this.responseHeaders.addAll(Arrays.asList(httpResponse.getAllHeaders()));

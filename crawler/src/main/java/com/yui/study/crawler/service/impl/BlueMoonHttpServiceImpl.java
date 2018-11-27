@@ -1,6 +1,7 @@
 package com.yui.study.crawler.service.impl;
 
 import com.yui.study.crawler.enums.BlueMoonUrlEnums;
+import com.yui.study.crawler.service.HttpService;
 import com.yui.study.crawler.util.FileUtil;
 import com.yui.study.crawler.util.OcrUtil;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.io.IOException;
  * @date 2018/11/22
  */
 @Service
-public class BlueMoonHttpServiceImpl extends BaseHttpService {
+public class BlueMoonHttpServiceImpl extends BaseHttpService implements HttpService {
 
     @Override
     public void login(String userName, String password) {

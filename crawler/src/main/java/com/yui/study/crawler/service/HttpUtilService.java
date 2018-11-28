@@ -14,32 +14,32 @@ import java.util.Map;
 public interface HttpUtilService {
     /**
      * 根据正则表达式，从html中，下载图片
-     * @param html html内容
+     * @param mainUrl 选择页面
      * @param pattern 正则表达式
      */
-    File downloadImage(String html, String pattern);
+    File downloadImage(String mainUrl, String pattern);
 
     /**
      * 根据相同，相似，构建正则表达式，从html中，下载图片
-     * @param html html内容
+     * @param mainUrl 选择页面
      * @param sameChars 相同字符串
      * @param likeChars 相似字符串
      */
-    File downloadImage(String html, Map<Integer, String> sameChars, Map<Integer, String> likeChars);
+    File downloadImage(String mainUrl, Map<Integer, String> sameChars, Map<Integer, String> likeChars);
     /**
      * 根据正则表达式，从html中，下载图片
-     * @param html html内容
+     * @param mainUrl 选择页面
      * @param pattern 正则表达式
      * @param httpServletResponse response
      */
-    void downloadImage(String html, String pattern, HttpServletResponse httpServletResponse);
+    void downloadImage(String mainUrl, String pattern, HttpServletResponse httpServletResponse);
     /**
      * 根据相同，相似，构建正则表达式，从html中，下载图片
-     * @param html html内容
+     * @param mainUrl 选择页面
      * @param sameChars 相同字符串
      * @param likeChars 相似字符串
      * @param httpServletResponse response
      */
-    void downloadImage(String html, Map<Integer, String> sameChars, Map<Integer, String> likeChars, HttpServletResponse httpServletResponse);
+    void downloadImage(String mainUrl, Map<Integer, String> sameChars, Map<Integer, String> likeChars, HttpServletResponse httpServletResponse);
 
 }

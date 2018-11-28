@@ -1,8 +1,10 @@
 package com.yui.study.crawler.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.yui.study.crawler.service.HttpUtilService;
 import com.yui.study.crawler.util.FileUtil;
 import com.yui.study.crawler.util.PatternUtil;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.stream.FileImageOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -16,31 +18,34 @@ import java.util.Map;
  * @author XuZhuohao
  * @date 2018/11/27
  */
+@Service
 public class HttpUtilServiceImpl extends BaseHttpService implements HttpUtilService {
     @Override
-    public File downloadImage(String html, String pattern) {
+    public File downloadImage(String mainUrl, String pattern) {
+        this.doGet(mainUrl, null, null);
+        String html = this.getResult();
         List<String> urls = PatternUtil.getStringByPattern(pattern, html, 1);
+        System.out.println(JSON.toJSONString(urls));
         String path = "temp" + File.separator + System.currentTimeMillis();
         // 创建文件夹
         FileUtil.mkdirDirectory(path);
         urls.forEach(url -> this.downloadImage(url, path, ""));
         // 压缩文件
+        return FileUtil.zipFiles(path, false, true);
+    }
 
+    @Override
+    public File downloadImage(String mainUrl, Map<Integer, String> sameChars, Map<Integer, String> likeChars) {
+        return null;
+    }
+
+    @Override
+    public void downloadImage(String mainUrl, String pattern, HttpServletResponse httpServletResponse) {
 
     }
 
     @Override
-    public File downloadImage(String html, Map<Integer, String> sameChars, Map<Integer, String> likeChars) {
-
-    }
-
-    @Override
-    public void downloadImage(String html, String pattern, HttpServletResponse httpServletResponse) {
-
-    }
-
-    @Override
-    public void downloadImage(String html, Map<Integer, String> sameChars, Map<Integer, String> likeChars, HttpServletResponse httpServletResponse) {
+    public void downloadImage(String mainUrl, Map<Integer, String> sameChars, Map<Integer, String> likeChars, HttpServletResponse httpServletResponse) {
 
     }
 
@@ -52,14 +57,14 @@ public class HttpUtilServiceImpl extends BaseHttpService implements HttpUtilServ
         if (fileName == null || fileName.length() == 0) {
             fileName = PatternUtil.getStringByPattern(pattern, url, 0).get(0);
         }
-        try(FileImageOutputStream imageOutput = new FileImageOutputStream(new File(path + File.separator + fileName))){
+        try (FileImageOutputStream imageOutput = new FileImageOutputStream(new File(path + File.separator + fileName))) {
             // 往文件里面写数据
             byte[] buffer = new byte[1024];
             int length;
-            while((length = this.getIs().read(buffer))>0){
-                imageOutput.write(buffer,0,length);
+            while ((length = this.getIs().read(buffer)) > 0) {
+                imageOutput.write(buffer, 0, length);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getLocalizedMessage());
         }

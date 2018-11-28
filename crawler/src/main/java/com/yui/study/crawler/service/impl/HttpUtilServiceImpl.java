@@ -53,17 +53,15 @@ public class HttpUtilServiceImpl extends BaseHttpService implements HttpUtilServ
         // 请求图片
         this.doGet(url, null, null);
         // 保存图片 "(([^/|^\\\\]*)[\\.]{1}([\\w]*))"
-        String pattern = "([^/|^\\\\]*)[\\.]{1}([\\w]*)";
+        String pattern = "(([^/|^\\\\]*)[\\.]{1}([\\w]*))";
         if (fileName == null || fileName.length() == 0) {
-            fileName = PatternUtil.getStringByPattern(pattern, url, 0).get(0);
+            final List<String> fileNames = PatternUtil.getStringByPattern(pattern, url, 1);
+            fileName = fileNames.get(fileNames.size() - 1);
         }
         try (FileImageOutputStream imageOutput = new FileImageOutputStream(new File(path + File.separator + fileName))) {
             // 往文件里面写数据
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = this.getIs().read(buffer)) > 0) {
-                imageOutput.write(buffer, 0, length);
-            }
+            imageOutput.write(this.getBao().toByteArray());
+            imageOutput.flush();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getLocalizedMessage());

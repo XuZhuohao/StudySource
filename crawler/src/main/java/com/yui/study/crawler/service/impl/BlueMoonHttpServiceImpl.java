@@ -29,7 +29,7 @@ public class BlueMoonHttpServiceImpl extends BaseHttpService implements HttpServ
             // 创建保存路径
             FileUtil.mkdirDirectory(valiCodeSavePath);
             // 保存图片
-            OcrUtil.downloadJPG(this.getIs(), valiCodeSavePath);
+            OcrUtil.downloadJPG(this.getBao(), valiCodeSavePath);
         } catch (IOException e) {
             e.printStackTrace();
         }

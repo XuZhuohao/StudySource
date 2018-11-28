@@ -4,8 +4,6 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import net.sourceforge.tess4j.util.LoadLibs;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
 
 import java.io.*;
 
@@ -19,13 +17,12 @@ public class OcrUtil {
     public static void main(String[] args) {
         System.out.println(getImgContent("C:\\Users\\Administrator\\Desktop\\valiCodeImg.jpeg"));
     }
-    public static void downloadJPG(InputStream input, String fileName) throws IOException {
+
+    public static void downloadJPG(ByteArrayOutputStream bao, String fileName) throws IOException {
 //        InputStream input = httpResponse.getEntity().getContent()
         OutputStream output = new FileOutputStream(new File(fileName));
-        IOUtils.copy(input, output);
-        if (output != null) {
-            output.close();
-        }
+        bao.writeTo(output);
+        output.close();
         output.flush();
     }
 

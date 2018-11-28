@@ -1,6 +1,5 @@
 package com.yui.study.crawler.service.impl;
 
-import com.yui.study.crawler.service.HttpService;
 import lombok.Getter;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -16,11 +15,12 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +40,7 @@ public abstract class BaseHttpService {
     @Getter
     private CookieStore cookieStore = new BasicCookieStore();
     @Getter
-    private InputStream is;
+    private ByteArrayOutputStream bao = new ByteArrayOutputStream();
 
     public void doGet(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         CloseableHttpClient httpClient = null;
@@ -67,7 +67,7 @@ public abstract class BaseHttpService {
             httpGet.setConfig(requestConfig);
             // 执行get请求得到返回对象
             response = httpClient.execute(httpGet);
-            this.setInfro(response);
+            this.setInfo(response);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getLocalizedMessage());
@@ -123,7 +123,7 @@ public abstract class BaseHttpService {
         try {
             // httpClient对象执行post请求,并返回响应参数对象
             httpResponse = httpClient.execute(httpPost);
-            this.setInfro(httpResponse);
+            this.setInfo(httpResponse);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -208,23 +208,31 @@ public abstract class BaseHttpService {
      * @param httpResponse 请求
      * @throws IOException IOException
      */
-    private void setInfro(CloseableHttpResponse httpResponse) throws IOException {
+    private void setInfo(CloseableHttpResponse httpResponse) throws IOException {
         // 清空全局头信息，把此次获取的头信息保存到全局
         this.responseHeaders.clear();
         this.responseHeaders.addAll(Arrays.asList(httpResponse.getAllHeaders()));
         // 从响应对象中获取响应内容
         HttpEntity entity = httpResponse.getEntity();
-        this.result = EntityUtils.toString(entity);
-        try {
-            if (this.is != null) {
-                this.is.close();
-                is = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //this.result = ""
         // 输出流
-        this.is = entity.getContent();
+        InputStream is = entity.getContent();
+
+        try{
+            this.bao.close();
+            this.bao = null;
+        } catch (Exception e){
+            System.err.println("bao 关闭失败");
+        } finally {
+            bao = new ByteArrayOutputStream();
+        }
+        // 写数据
+        // TODO: 需要逐个字符读取，否则图片失真
+        int b;
+        while ((b = is.read()) != -1) {
+            this.bao.write(b);
+        }
+        this.result = this.bao.toString(StandardCharsets.UTF_8.name());
     }
 
     /**

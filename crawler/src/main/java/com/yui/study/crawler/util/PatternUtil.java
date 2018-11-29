@@ -2,6 +2,7 @@ package com.yui.study.crawler.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,4 +32,14 @@ public class PatternUtil {
         }
         return result;
     }
+
+    public static String getPatternFromChar(String result, String likeChars, List<String> likeCharsWithOuts){
+        //
+        String temp = likeCharsWithOuts.get(0);
+        for (char c : temp.toCharArray()) {
+
+        }
+        return null;
+    }
+
 }

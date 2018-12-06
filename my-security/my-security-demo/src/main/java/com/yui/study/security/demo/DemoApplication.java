@@ -2,7 +2,7 @@ package com.yui.study.security.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * springboot 入口
@@ -11,7 +11,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @date 2018-09-17 11:28
  */
 @SpringBootApplication
-@EnableSwagger2
+@ComponentScan(basePackages = {"com.yui.study.security.browser.config"})
+//@EnableSwagger2
 public class DemoApplication {
     /**
      * 启动入口

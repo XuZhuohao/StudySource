@@ -2,6 +2,7 @@ package com.yui.study.security.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * springboot 入口
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2018-09-17 11:28
  */
 @SpringBootApplication
+@EnableSwagger2
 public class DemoApplication {
     /**
      * 启动入口

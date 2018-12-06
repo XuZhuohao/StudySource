@@ -2,6 +2,9 @@ package com.yui.study.security.demo.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.yui.study.security.demo.dao.User;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +49,8 @@ public class UserController {
 
     @GetMapping("/{id:\\d+}")
     @JsonView(User.UserDetailView.class)
-    public User getUserInfor(@PathVariable Long id){
+    @ApiOperation("用户信息查询服务")
+    public User getUserInfor(@PathVariable @ApiParam(value = "用户id") long id){
         User user = new User();
         user.setId(id);
         user.setName("tom");

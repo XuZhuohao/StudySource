@@ -1,8 +1,7 @@
 package com.yui.study.security.demo.dao;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Getter;
-import lombok.Setter;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,7 +24,9 @@ public class User {
     private Long id;
 
     @NotNull(message = "password must not be null")
+    @ApiModelProperty("用户id")
     private String password;
+
     private Date birthDate;
 
     @JsonView(UserSimpleView.class)

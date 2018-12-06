@@ -1,5 +1,6 @@
 package com.yui.study.security.demo;
 
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,8 @@ public class UserControllerTest {
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
+
+    private FileUpload fileUpload;
 
     @Before
     public void setup() {
@@ -93,5 +96,16 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError())
                 .andReturn().getResponse().getContentAsString();
         System.out.println(result);
+    }
+
+    @Test
+    public void whenUploadSuccess() throws Exception {
+        final byte[] fileName = "hello upload".getBytes();
+        final MockHttpServletResponse response = mockMvc.perform(
+                MockMvcRequestBuilders.multipart("/file","file")
+                .file("file", fileName))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn().getResponse();
+        System.out.println(response);
     }
 }

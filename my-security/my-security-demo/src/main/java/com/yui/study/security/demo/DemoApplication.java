@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2018-09-17 11:28
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.yui.study.security.browser.config"})
+@ComponentScan(basePackages = {"com.yui.study.security.browser"})
 //@EnableSwagger2
 public class DemoApplication {
     /**

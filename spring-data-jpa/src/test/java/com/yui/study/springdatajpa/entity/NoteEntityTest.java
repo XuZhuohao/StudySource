@@ -1,5 +1,7 @@
 package com.yui.study.springdatajpa.entity;
 
+import com.yui.study.springdatajpa.note.entity.BookEntity;
+import com.yui.study.springdatajpa.note.repository.BookRepository;
 import com.yui.study.springdatajpa.repository.AnnotationRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +20,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class NoteEntityTest {
     @Autowired
     private AnnotationRepository annotationRepository;
-
+    @Autowired
+    private BookRepository bookRepository;
+    @Test
+    public void testMappedSuperclass(){
+        BookEntity bookEntity = new BookEntity();
+        bookEntity.setName("test");
+        bookEntity.setTest("change");
+        bookRepository.save(bookEntity);
+    }
     /**
      * quick start
      */
@@ -32,8 +42,5 @@ public class NoteEntityTest {
     @Test
     public void testBasic(){
         // @Basic 注解测试
-
-
-
     }
 }

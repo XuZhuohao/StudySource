@@ -25,7 +25,7 @@ public class InitZkClient {
     @Autowired
     private Watcher defaultWatcher;
 
-    private static final Logger logger = LoggerFactory.getLogger(InitZkClient.class);
+    private final static Logger logger = LoggerFactory.getLogger(InitZkClient.class);
 
     @Bean(name = "zkClient")
     public ZooKeeper getZkClient(){

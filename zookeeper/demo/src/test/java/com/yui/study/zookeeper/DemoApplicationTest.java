@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @date 2019/3/27
  */
 
+/*
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTest {
@@ -22,3 +23,4 @@ public class DemoApplicationTest {
         System.out.println(zkClient.getState());
     }
 }
+*/

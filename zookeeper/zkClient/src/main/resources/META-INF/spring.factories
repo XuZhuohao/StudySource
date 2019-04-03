@@ -2,3 +2,6 @@
 #com.yui.study.zookeeper.config.InitApplicationContextInitializer
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.yui.study.zookeeper.ZkClientScan
+
+org.springframework.context.ApplicationListener=\
+com.yui.study.zookeeper.factories.MyApplicationListener

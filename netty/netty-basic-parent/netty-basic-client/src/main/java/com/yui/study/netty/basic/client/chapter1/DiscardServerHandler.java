@@ -3,6 +3,7 @@ package com.yui.study.netty.basic.client.chapter1;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
 /**
  * DiscardServerHandler 继承自 ChannelInboundHandlerAdapter，
  * 这个类实现了 ChannelInboundHandler接口，ChannelInboundHandler 提供了许多事件处理的接口方法。
@@ -18,6 +19,19 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        /**
+         * 多余的用来打印服务接收数据，判断是否没问题
+         */
+        {
+            ByteBuf in = (ByteBuf) msg;
+            /**
+             * 这个低效的循环事实上可以简化为:System.out.println(in.toString(io.netty.util.CharsetUtil.US_ASCII))
+             */
+            while (in.isReadable()) {
+                System.out.print((char) in.readByte());
+                System.out.flush();
+            }
+        }
         ///
         /**
          * 为了实现 DISCARD 协议，处理器不得不忽略所有接受到的消息。

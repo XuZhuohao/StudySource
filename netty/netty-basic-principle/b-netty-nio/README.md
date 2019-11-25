@@ -20,5 +20,20 @@
 6 数据的读取写入是通过 Buffer，这个和 BIO，BIO 中要么是输入流，或者是输出流，不能双向，但是NIO的Buffer 是可以读也可以写，需要fip方法切换  
 7 channel是双向的，可以返回底层操作系统的情况，比如Linux，底层的操作系统通道就是双向的
 
-## 4. 缓冲区(Buffer)
-    
+## 4.代码
+### 4.1 应用实例1-本地文件写数据
+实例要求：
+1）使用前面学习后的ByteBuffer（缓冲）和FileChannel（通道），将“hello world”写入到file01.txt中  
+2）文件不存在就创建  
+3）{@link com.yui.study.netty.nio.NioFileChannel.case1}  
+
+### 4.2 应用实例2-本地文件读数据
+实例要求：
+1）使用前面学习后的ByteBuffer（缓冲）和FileChannel（通道），将 file01.txt 中的数据读入到程序，并显示在控制台屏幕  
+2）假定文件已经存在  
+3）{@link com.yui.study.netty.nio.NioFileChannel.case2}  
+
+### 4.3 应用实例3-使用一个Buffer完成文件读取实例要求：+
+1）使用FileChannel（通道）和方法read，write，完成文件的拷贝
+2）拷贝一个文本文件1.txt，放在项目下即可  
+3）{@link com.yui.study.netty.nio.NioFileChannel.case3}  

@@ -45,6 +45,7 @@ public class NioFileChannel {
                 System.out.println(new String(byteBuffer.array()));
                 /// byteBuffer.array() 不会影响 Buffer 的属性
 //                byteBuffer.flip();
+                byteBuffer.clear();
             }
 
         } catch (Exception e) {
@@ -61,7 +62,7 @@ public class NioFileChannel {
             while (fisChannel.read(byteBuffer) != -1) {
                 byteBuffer.flip();
                 osChannel.write(byteBuffer);
-                byteBuffer.flip();
+                byteBuffer.clear();
             }
         } catch (Exception e) {
             e.printStackTrace();

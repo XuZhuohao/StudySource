@@ -50,4 +50,4 @@ README_Channel.md
 1）ByteBuffer 支持类型化的put和get，put放入的是什么数据类型，get就应该使相应的数据类型来取出，否则可能有BufferUnderflowException异常。  
 2）可以将一个普通Buffer 转成只读Buffer({@link com.yui.study.netty.nio.NioFileChannel.readOnly})  
 3）NIO还提供了MappedByteBuffer，可以让文件直接在内存（堆外的内存）中行修改，而如何同步到文件由NIO来完成.  
-4）前面我们讲的读写操作，都是通过一个Buffer完成的，NIO还支持通过多个 Buffer（即Buffer 数组）完成读写操作，即Scattering和Gathering  
+4）前面我们讲的读写操作，都是通过一个Buffer完成的，NIO还支持通过多个 Buffer（即Buffer 数组）完成读写操作，即Scattering和Gathering({@link com.yui.study.netty.nio.NioFileChannel.scatteringAndGathering})  

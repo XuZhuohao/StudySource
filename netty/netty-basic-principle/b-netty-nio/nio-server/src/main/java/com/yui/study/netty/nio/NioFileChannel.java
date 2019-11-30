@@ -24,7 +24,7 @@ public class NioFileChannel {
 //        case4();
 //        readOnly();
 //        mappedByteBuffer();
-        scatteringAndGatering();
+        scatteringAndGathering();
     }
 
     public static void case1() {
@@ -126,7 +126,7 @@ public class NioFileChannel {
      * Scattering: 将数据写入到 buffer 时间，可以将 buffer 数据，依次写入 [分散]
      * Gathering: 从 buffer 读取数据时，可以采用 buffer 数组，依次读
      */
-    public static void scatteringAndGatering() throws Exception {
+    public static void scatteringAndGathering() throws Exception {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         InetSocketAddress inetSocketAddress = new InetSocketAddress(7000);
         serverSocketChannel.socket().bind(inetSocketAddress);

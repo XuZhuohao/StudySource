@@ -20,6 +20,9 @@
 6 数据的读取写入是通过 Buffer，这个和 BIO，BIO 中要么是输入流，或者是输出流，不能双向，但是NIO的Buffer 是可以读也可以写，需要fip方法切换  
 7 channel是双向的，可以返回底层操作系统的情况，比如Linux，底层的操作系统通道就是双向的
 
+README_Buffer.md  
+README_Channel.md  
+
 ## 4.代码
 ### 4.1 应用实例1-本地文件写数据
 实例要求：
@@ -37,3 +40,14 @@
 1）使用FileChannel（通道）和方法read，write，完成文件的拷贝
 2）拷贝一个文本文件1.txt，放在项目下即可  
 3）{@link com.yui.study.netty.nio.NioFileChannel.case3}  
+
+### 4.4 应用实例4-拷贝文件transferFrom方法实例要求：
+1）使用FileChannel（通道）和方法transferFrom，完成文件的拷贝  
+2）拷贝一张图片  
+3）{@link com.yui.study.netty.nio.NioFileChannel.case4}
+
+## 5.注意事项
+1）ByteBuffer 支持类型化的put和get，put放入的是什么数据类型，get就应该使相应的数据类型来取出，否则可能有BufferUnderflowException异常。  
+2）可以将一个普通Buffer 转成只读Buffer({@link com.yui.study.netty.nio.NioFileChannel.readOnly})  
+3）NIO还提供了MappedByteBuffer，可以让文件直接在内存（堆外的内存）中行修改，而如何同步到文件由NIO来完成.  
+4）前面我们讲的读写操作，都是通过一个Buffer完成的，NIO还支持通过多个 Buffer（即Buffer 数组）完成读写操作，即Scattering和Gathering  

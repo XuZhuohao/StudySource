@@ -43,3 +43,15 @@ selector.selectNow(); // 不阻塞，立马返还
 1）编写一个NIO入门案例，实现服务器端和客户端之间的数据简单通讯（非阻塞）  
 2）目的：理解NIO非阻塞网络编程机制  
 3）{@link }  
+
+
+## 7.SelectionKey
+
+- public abstract Selector selector(); // 得到与之关联的 Selector 对象  
+- public abstract SelectableChannel channel(); // 得到与之关联的通道  
+- public final Object attachment();  //得到与之关联的共享数据  
+- public abstract SelectionKey interestOps(int ops); // 设置或改变监听事件  
+- public final boolean isAcceptable(); // 是否可以 accept  
+- public final boolean isReadable(); // 是否可以读  
+- public final boolean isWritable(); // 是否可以写  
+- public final boolean isConnectable();   

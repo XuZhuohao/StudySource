@@ -3,18 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>netty-basic-principle</artifactId>
+        <artifactId>b-netty-nio</artifactId>
         <groupId>com.yui.study</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>b-netty-nio</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>nio-server</module>
-        <module>group-chat</module>
-    </modules>
+    <artifactId>group-chat</artifactId>
 
 
 </project>

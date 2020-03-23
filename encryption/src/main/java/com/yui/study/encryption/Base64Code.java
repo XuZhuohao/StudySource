@@ -1,7 +1,6 @@
 package com.yui.study.encryption;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class Base64Code {
         }
         // 每6个值作为一个看做一个code，最后不足6个值的，后面补0
         int fillZeroCnt = 6 - (binaryBuilder.length() % 6);
-        int equalCnt = 4 - binaryBuilder.length() % 4;
+        int equalCnt = 4 - (binaryBuilder.length()/6 + 1) % 4;
         while(fillZeroCnt-- > 0){
             binaryBuilder.append("0");
         }
@@ -47,9 +46,13 @@ public class Base64Code {
             result.append(Base64Code.COD.get(index));
         }
         // TODO ====
+        for(int i=0; i<equalCnt; i++){
+            result.append("=");
+        }
         System.out.println(result.toString());
         System.out.println(equalCnt);
-        System.out.println(MyBase64.jdkBase64Decode(src));
+        System.out.println(MyBase64.jdkBase64Encode(src));
+//        System.out.println(new String(MyBase64.jdkBase64Decode(src).getBytes(StandardCharsets.US_ASCII), StandardCharsets.UTF_8));
 
 
     }
